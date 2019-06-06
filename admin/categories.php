@@ -54,7 +54,7 @@
         <div class="col-md-8">
           <div class="page-action">
             <!-- show when multiple checked -->
-            <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
+            <a id="delAll" class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
           </div>
           <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -257,20 +257,60 @@
     // 给thead下面的复选框 注册点击事件 
     $("thead input").on('click', function() {
       $('tbody input').prop('checked', $(this).prop('checked'));
+      // 如果上面的复选框是打上勾的 需要显示批量删除的按钮 
+      if ($(this).prop('checked')) {
+        $("#delAll").show();
+      } else {
+        $("#delAll").hide();
+      }
+
     });
 
     // 先给下面的所有的复选框注册点击事件  判断被选中的个数 如果被选中的个数等于 下面复选框的个数 就表示全部选中 上面的复选框 也要跟着打勾 
 
-    $("tbody").on("click",'input',function(){
+    $("tbody").on("click", 'input', function() {
       // 选中个数 
       var all = $("tbody input:checked").size();
       // 下面所有的复选框的个数 
       var allInputSize = $('tbody input').size();
 
-      $("thead input").prop('checked',all == allInputSize);
+      $("thead input").prop('checked', all == allInputSize);
+      // 如果下面的复选框有两个以上打上勾 选中的个数 要显示批量删除的按钮
+      if (all >= 2) {
+        $("#delAll").show();
+      } else {
+        $("#delAll").hide();
+      }
     });
-    
 
+    // 需要给批量删除的按钮添加点击事件 
+    $('#delAll').on("click", function() {
+      if (window.confirm("你确定要删除吗?")) {
+        // 定义一个空数组
+        var ids = [];
+        // 获取被选中的复选框 
+        var check = $("tbody :checked");
+        // 遍历伪数组 
+        check.each(function(index, item) {
+          // 取 出id值 
+          var id = $(item).parents('tr').children().eq(4).attr("data-id");
+          // 把id属性值push到ids这个数组中
+          ids.push(id);
+        });
+        // 发送ajax 让后台将数据给删除 
+        $.ajax({
+          type:'post',
+          url:'api/delAllCategory.php',
+          data:{id:ids},
+          dataType:'json',
+          success:function(res){
+            if(res.code == 1){
+              check.parents('tr').remove();
+            }
+          }
+        });
+      }
+    });
   </script>
 </body>
 
