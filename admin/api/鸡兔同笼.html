@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 穷举法 一直列举下去 
+        // 有若干只鸡兔同在一个笼子里，从上面数，有35个头，从下面数，有94只脚。问笼中各有多少只鸡和兔？
+        // 先假设 鸡有1只  兔子 34   1*2 + 34*4 == 94 
+        // 先假设 鸡有2只  兔子 33   2*2 + 33*4 == 94
+        // --------------------------
+        //先假设 鸡有34只  兔子 1   34*2 + 1*4 == 94
+
+        for (var i = 1; i < 35; i++) {
+            var j = 35 - i; // 兔子
+            if(i * 2 + j *4 == 94){
+                document.write("鸡的数量是："+i+"---兔子的数量是："+j);
+                break;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

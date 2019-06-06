@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 100 可以买100只鸡 公鸡 5块钱一只 母鸡 3块钱一只 小鸡 一块钱3只 
+        //100块钱最多只能买20只公鸡  最多只能买33只母鸡 
+        for (var i = 0; i < 20; i++) {
+            for (var j = 1; j < 33; j++) {
+                var k = 100 - i - j; // 小鸡数量  = 100 - 公鸡 - 母鸡  
+                // 还需要判断钱的数量  
+                if (i * 5 + 3 * j + k / 3 == 100) {
+                    document.write("公鸡的数量：" + i + "----母鸡的数量："+j+"----小鸡的数量："+k+"<br>");
+                }
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
