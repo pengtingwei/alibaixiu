@@ -167,6 +167,7 @@
     var totalPage; // 总页数  
 
     function showPage() {
+        console.log(totalPage);
       // 每一个页要显示多少条数 
 
       var start;
@@ -175,27 +176,30 @@
       if (totalPage > 5) {
         start = currentPage - 2;
         end = currentPage + 2;
-        
+
+
+        if (currentPage < 3) {
+          start = 1;
+          end = start + 4;
+        }
+
+        // 总共有11页  如果当前页是11    start = totalPage-4   end = totalPage
+        // 总共有10页  如果当前页是10    start = totalPage-4   end = totalPage
+        // 总共有9页  如果当前页是10    start = totalPage-4   end = 11
+        // 总共有8页  如果当前页是10    start = totalPage-4   end = 11
+
+        if (currentPage > totalPage - 3) {
+          start = totalPage - 4;
+          end = totalPage;
+        }
+
 
       } else {
         start = 1;
         end = totalPage;
       }
 
-      if (currentPage < 3) {
-        start = 1;
-        end = start + 4;
-      }
 
-      // 总共有11页  如果当前页是11    start = totalPage-4   end = totalPage
-      // 总共有10页  如果当前页是10    start = totalPage-4   end = totalPage
-      // 总共有9页  如果当前页是10    start = totalPage-4   end = 11
-      // 总共有8页  如果当前页是10    start = totalPage-4   end = 11
-
-      if (currentPage > totalPage - 3) {
-        start = totalPage - 4;
-        end = totalPage;
-      }
 
       var str = "";
       // 当前页不等于1 就让它显示 
@@ -252,6 +256,7 @@
     $(".pagination").on("click", 'li', function() {
       // 将字符串转换为数值 
       var dataPage = parseInt($(this).attr("data-page"));
+      console.log(currentPage);
       // 得到dataPage 需要向服务器发起请求
       currentPage = dataPage;
       render(dataPage);

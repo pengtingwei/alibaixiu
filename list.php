@@ -6,9 +6,7 @@
     </div>
 
     <!-- 新增div 行内元素与行内块元素在一个父盒子要居中 可以使用text-align:center-->
-    <div class="loadMore text-center">
-        <button class="btn btn-success btn-lg">点击加载更多</button>
-    </div>
+   
 
 </div>
 <div class="footer">
@@ -96,6 +94,12 @@
         dataType: 'json',
         success: function(res) {
 
+           var divMove = ' <div class="loadMore text-center">\
+        <button class="btn btn-success btn-lg">点击加载更多</button>\
+    </div>';
+
+        $('.content').append(divMove);
+
             // 这里一定要判断 res.code的值 是不是等于1 如果等于 1就表示有数据返回
             if (res.code == 1) {
                 // 将数据渲染到html页面
@@ -112,7 +116,7 @@
     var count = 1;
 
     // 实现加载更多的功能 
-    $(".loadMore .btn").on("click", function() {
+    $(".content").on("click",'.loadMore .btn', function() {
        
         count++;
         $.ajax({

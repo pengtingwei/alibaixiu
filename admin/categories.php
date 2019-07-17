@@ -126,7 +126,6 @@
         if (res.code == 1) {
           var str = template('nav', res);
           $('tbody').html(str);
-
         }
       }
     });

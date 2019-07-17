@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
   <script src="../assets/vendors/nprogress/nprogress.js"></script>
+  <!-- 引入ckeditor插件 -->
+  <script src="../assets/vendors/ckeditor/ckeditor.js"></script>
 </head>
 <body>
   <script>NProgress.start()</script>
@@ -73,15 +75,17 @@
 
   <?php 
   $current_page = "post-add";
-
-
-  include 'public/aside.php' 
-  
-  
+  include 'public/aside.php'; 
   ?>
 
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
   <script>NProgress.done()</script>
+  <script>
+    // 使用CKEDITOR.replace("要替换的文本域的ID属性值")
+    // CKEDITOR.replace("content");
+    CKEDITOR.replace("content");
+  
+  </script>
 </body>
 </html>
